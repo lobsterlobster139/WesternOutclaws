@@ -9,3 +9,5 @@
 
 [resource]
 script = ExtResource("2_ns6ah")
+game_name = "WesternOutclaws"
+game_config_version = 2
