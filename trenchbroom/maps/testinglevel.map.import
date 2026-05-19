@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://trojctj3avpq"
+path="res://.godot/imported/testinglevel.map-042b6f8c6a6a73e2e7eb92207a09ba14.tres"
+
+[deps]
+
+source_file="res://trenchbroom/maps/testinglevel.map"
+dest_files=["res://.godot/imported/testinglevel.map-042b6f8c6a6a73e2e7eb92207a09ba14.tres"]
+
+[params]
+
