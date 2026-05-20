@@ -87,4 +87,4 @@ shape = SubResource("ConvexPolygonShape3D_aq1xd")
 shape = SubResource("ConvexPolygonShape3D_perkj")
 
 [node name="Player" parent="." unique_id=2120456270 instance=ExtResource("5_72vgf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.040999, 0)
