@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var camera = $Head/Pivot/Camera
 @onready var full_collision = $FullCollision
 @onready var crouch_collision = $CrouchCollision
-@onready var raycast = $CrouchCollision/RayCast3D
+@onready var crouch_raycast = $CrouchCollision/RayCast3D
 
 
 const JUMP_VELOCITY = 5.0
@@ -49,9 +49,11 @@ func _physics_process(delta):
 		full_collision.disabled = true
 		camera.position.y = lerp(camera.position.y, CAMERA_CROUCH_POS, 7 * delta)
 	else:
-		speed = WALK_SPEED
-		full_collision.disabled = false
-		camera.position.y = lerp(camera.position.y, CAMERA_WALK_POS, 7 * delta)
+		if not crouch_raycast.is_colliding():
+			
+			speed = WALK_SPEED
+			full_collision.disabled = false
+			camera.position.y = lerp(camera.position.y, CAMERA_WALK_POS, 7 * delta)
 	
 	
 	# Get the input direction and handle the movement/deceleration.
