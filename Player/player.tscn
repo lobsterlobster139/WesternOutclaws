@@ -1,21 +1,39 @@
 [gd_scene format=3 uid="uid://mm1kjib6k2su"]
 
 [ext_resource type="Script" uid="uid://c4nge63p6j4v7" path="res://Player/player.gd" id="1_btcbx"]
+[ext_resource type="Script" uid="uid://c8ygvuejlg3sq" path="res://Player/lean.gd" id="2_4ntmi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
+height = 1.0
+
 [node name="Player" type="CharacterBody3D" unique_id=2120456270]
 script = ExtResource("1_btcbx")
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=1499518157]
+visible = false
 mesh = SubResource("CapsuleMesh_hvfyp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1181729024]
+[node name="FullCollision" type="CollisionShape3D" parent="." unique_id=1181729024]
 shape = SubResource("CapsuleShape3D_hvfyp")
+
+[node name="CrouchCollision" type="CollisionShape3D" parent="." unique_id=968426518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("CapsuleShape3D_4ntmi")
+
+[node name="RayCast3D" type="RayCast3D" parent="CrouchCollision" unique_id=1744574567]
+target_position = Vector3(0, 1.51, 0)
 
 [node name="Head" type="Node3D" parent="." unique_id=1912516752]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head" unique_id=545374881]
+[node name="Pivot" type="Node3D" parent="Head" unique_id=1933594064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3, 0)
+script = ExtResource("2_4ntmi")
+
+[node name="Camera" type="Camera3D" parent="Head/Pivot" unique_id=545374881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+current = true

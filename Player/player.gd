@@ -2,13 +2,22 @@ extends CharacterBody3D
 
 @onready var head = $Head
 @onready var player = $"."
-@onready var camera = $Head/Camera3D
+@onready var camera = $Head/Pivot/Camera
+@onready var full_collision = $FullCollision
+@onready var crouch_collision = $CrouchCollision
+@onready var raycast = $CrouchCollision/RayCast3D
 
 
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 5.0
+const WALK_SPEED = 4.0
+const CROUCH_SPEED = 1.5
+
+const CAMERA_CROUCH_POS = 0.75
+const CAMERA_WALK_POS = 1.3
 
 var sensitivity = 0.002
-var speed = 5.0
+var speed = 4.0
+
 
 #head_bob variables
 const BOB_FREQ = 3
@@ -30,11 +39,21 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+	
+	if Input.is_action_pressed("crouch"):
+		speed = CROUCH_SPEED
+		full_collision.disabled = true
+		camera.position.y = lerp(camera.position.y, CAMERA_CROUCH_POS, 7 * delta)
+	else:
+		speed = WALK_SPEED
+		full_collision.disabled = false
+		camera.position.y = lerp(camera.position.y, CAMERA_WALK_POS, 7 * delta)
+	
+	
 	# Get the input direction and handle the movement/deceleration.
 	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -53,9 +72,11 @@ func _physics_process(delta):
 	
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
-	camera.transform.origin = head_bob(t_bob)
+	head.transform.origin = head_bob(t_bob)
 	
 	move_and_slide()
+
+
 
 func head_bob(time) -> Vector3:
 	var pos = Vector3.ZERO
