@@ -5,7 +5,12 @@ extends CharacterBody3D
 @onready var camera = $Head/Pivot/Camera
 @onready var full_collision = $FullCollision
 @onready var crouch_collision = $CrouchCollision
+
 @onready var crouch_raycast = $CrouchCollision/RayCast3D
+@onready var top_raycast = $WallClimbDetectors/TopRaycast
+@onready var bottom_raycast = $WallClimbDetectors/DickRaycast
+@onready var eye_raycast = $Head/Pivot/Camera/EyeRaycast
+
 
 
 const JUMP_VELOCITY = 5.0
@@ -13,7 +18,7 @@ const WALK_SPEED = 4.0
 const CROUCH_SPEED = 1.5
 
 const CAMERA_CROUCH_POS = 0.75
-const CAMERA_WALK_POS = 1.3
+const CAMERA_WALK_POS = 1.5
 
 var sensitivity = 0.002
 var speed = 4.0
@@ -23,6 +28,8 @@ var speed = 4.0
 const BOB_FREQ = 3
 const BOB_AMP = 0.06
 var t_bob = 0.0
+
+var can_walljump = true
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -39,11 +46,20 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	#walljump
+	if Input.is_action_pressed("jump") and not is_on_floor() and top_raycast.is_colliding() == false and bottom_raycast.is_colliding() == true and eye_raycast.is_colliding() == false and can_walljump == true:
+		velocity.y = JUMP_VELOCITY
+	if bottom_raycast.is_colliding() == false:
+		can_walljump = false
+		$WalljumpCooldown.start()
+
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
+	#crouch
 	if Input.is_action_pressed("crouch"):
 		speed = CROUCH_SPEED
 		full_collision.disabled = true
@@ -69,8 +85,8 @@ func _physics_process(delta):
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 8.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 8.0)
 	else:
-		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
-		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
+		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
+		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
 	
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -85,3 +101,7 @@ func head_bob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * (BOB_AMP / 2)
 	return pos
+
+
+func _on_walljump_cooldown_timeout():
+	can_walljump = true
