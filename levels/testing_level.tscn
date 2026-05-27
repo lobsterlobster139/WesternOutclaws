@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://mm1kjib6k2su" path="res://Player/player.tscn" id="5_72vgf"]
 [ext_resource type="Material" uid="uid://c5enuhvll3mby" path="res://trenchbroom/textures/seamless/concrete6.tres" id="5_v4s60"]
 [ext_resource type="Texture2D" uid="uid://dw57njluapvuf" path="res://trenchbroom/textures/seamless/dirt4.png" id="6_g48sg"]
+[ext_resource type="PackedScene" uid="uid://bgrup2bfg3egt" path="res://Enemies/test_target.tscn" id="8_aq1xd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_72vgf"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -125,3 +126,6 @@ shape = SubResource("ConvexPolygonShape3D_8d4bf")
 
 [node name="Player" parent="." unique_id=2120456270 instance=ExtResource("5_72vgf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.040999, 2)
+
+[node name="TestTarget" parent="." unique_id=1536901005 instance=ExtResource("8_aq1xd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5305028, -3.6064715)

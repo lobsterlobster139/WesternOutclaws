@@ -31,6 +31,9 @@ var t_bob = 0.0
 
 var can_walljump = true
 
+#variables that actually matter in game
+var health = 9
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -43,6 +46,11 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta):
+	#REMOVE LATER!!!!!!!!!!!!!!!!!
+	$Head/Pivot/Camera/Label.text = str(PlayerData.revolver_ammo)
+	if Input.is_action_just_pressed("DEBUG hurt self"):
+		hit("revolver")
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -105,3 +113,9 @@ func head_bob(time) -> Vector3:
 
 func _on_walljump_cooldown_timeout():
 	can_walljump = true
+
+
+func hit(bullet_type):
+	if bullet_type == "revolver":
+		health -= PlayerData.revolver_damage
+	print(health)

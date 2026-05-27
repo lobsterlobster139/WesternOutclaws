@@ -11,11 +11,14 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 height = 1.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_btcbx"]
+font_size = 30
+
 [node name="Player" type="CharacterBody3D" unique_id=2120456270]
+collision_mask = 7
 script = ExtResource("1_btcbx")
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=1499518157]
-visible = false
 mesh = SubResource("CapsuleMesh_hvfyp")
 
 [node name="FullCollision" type="CollisionShape3D" parent="." unique_id=1181729024]
@@ -44,13 +47,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.027271152, 0)
 target_position = Vector3(0, -0.1, -2)
 debug_shape_custom_color = Color(0.8901961, 0.09019608, 0.8901961, 1)
 
-[node name="Revolver" parent="Head/Pivot/Camera" unique_id=1192419823 node_paths=PackedStringArray("aim_cast") instance=ExtResource("3_btcbx")]
+[node name="Revolver" parent="Head/Pivot/Camera" unique_id=1192419823 node_paths=PackedStringArray("camera", "aim_cast") instance=ExtResource("3_btcbx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4744265, -0.31327367, -0.6860945)
+camera = NodePath("..")
 aim_cast = NodePath("../RevolverCast")
 
 [node name="RevolverCast" type="RayCast3D" parent="Head/Pivot/Camera" unique_id=760846391]
 target_position = Vector3(0, 0, -50)
+collision_mask = 2
 debug_shape_custom_color = Color(0.94509804, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Head/Pivot/Camera" unique_id=1578268949]
+offset_right = 359.0
+offset_bottom = 114.0
+label_settings = SubResource("LabelSettings_btcbx")
 
 [node name="WallClimbDetectors" type="Node3D" parent="." unique_id=932216127]
 
