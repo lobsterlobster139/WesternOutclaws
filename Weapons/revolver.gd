@@ -1,5 +1,6 @@
 extends Node3D
 
+#yuh
 @onready var gun_anim = $PlayerRightArmVer4.animation_player
 @export var camera : Camera3D
 @export var aim_cast : RayCast3D
