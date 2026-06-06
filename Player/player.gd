@@ -33,6 +33,7 @@ var can_walljump = true
 
 #variables that actually matter in game
 var health = 9
+var cigarettes = 5
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -45,11 +46,23 @@ func _unhandled_input(event):
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 
 
-func _physics_process(delta):
+
+func _process(delta):
 	#REMOVE LATER!!!!!!!!!!!!!!!!!
 	$Head/Pivot/Camera/Label.text = str(PlayerData.revolver_ammo)
 	if Input.is_action_just_pressed("DEBUG hurt self"):
 		hit("revolver")
+	
+	
+	if Input.is_action_just_pressed("smoke"):
+		if cigarettes > 0 and health < 9:
+			health += 1
+			cigarettes -= 1
+
+
+
+func _physics_process(delta):
+	
 	
 	# Add the gravity.
 	if not is_on_floor():

@@ -1,108 +1,19 @@
 [gd_scene format=3 uid="uid://osd7pfersljv"]
 
 [ext_resource type="Script" uid="uid://c0aotjygj01kn" path="res://Weapons/revolver.gd" id="1_a33xn"]
+[ext_resource type="PackedScene" uid="uid://bednupfhlmtri" path="res://models/player_right_arm_ver_4.tscn" id="2_iagck"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3nqbp"]
 size = Vector3(0.2, 0.2, 0.5)
-
-[sub_resource type="Animation" id="Animation_3nqbp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderMesh:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlaceholderMesh:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlaceholderMesh:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_a33xn"]
-resource_name = "fire"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderMesh:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.033333335, 0.10000001, 0.13333334, 0.20000002),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0, 0, 0), Vector3(0.34906584, 0, 0), Vector3(0.5235988, 0, 0), Vector3(0.2617994, 0, 0), Vector3(-0.17453292, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlaceholderMesh:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.02, 0.10000001, 0.13333334, 0.20000002),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0.1), Vector3(0, 0.15, 0.15), Vector3(0, 0.15, 0.15), Vector3(0, -0.05, -0.05), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_iagck"]
-resource_name = "reload"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderMesh:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4, 2.9666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iagck"]
-_data = {
-&"RESET": SubResource("Animation_3nqbp"),
-&"fire": SubResource("Animation_a33xn"),
-&"reload": SubResource("Animation_iagck")
-}
 
 [node name="Revolver" type="Node3D" unique_id=1192419823]
 script = ExtResource("1_a33xn")
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=451200719]
+visible = false
 cast_shadow = 0
 mesh = SubResource("BoxMesh_3nqbp")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1453585921]
-libraries/ = SubResource("AnimationLibrary_iagck")
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="PlayerRightArmVer4" parent="." unique_id=528390672 node_paths=PackedStringArray("parent") instance=ExtResource("2_iagck")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+parent = NodePath("..")

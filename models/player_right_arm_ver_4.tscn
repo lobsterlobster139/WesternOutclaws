@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bednupfhlmtri"]
+
+[ext_resource type="PackedScene" uid="uid://cw1wumw2jpody" path="res://blender models/player_rightarm_ver4.glb" id="1_wvbnc"]
+[ext_resource type="Script" uid="uid://0wxhef8bot1m" path="res://models/player_right_arm_ver_4.gd" id="2_5yxrq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvbnc"]
+albedo_color = Color(0.36654845, 0.17501974, 0.09672112, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yxrq"]
+albedo_color = Color(0.2946406, 0.29464063, 0.2946406, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a45yg"]
+albedo_color = Color(0.36087206, 0.2768625, 0.14024168, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqdpd"]
+albedo_color = Color(0.096204735, 0.09620475, 0.096204735, 1)
+
+[node name="PlayerRightArmVer4" unique_id=528390672 instance=ExtResource("1_wvbnc")]
+script = ExtResource("2_5yxrq")
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1653344159) index="0" unique_id=493011057]
+bones/0/rotation = Quaternion(-0.014611609, -0.0058272174, 0.94120514, 0.3374691)
+bones/1/rotation = Quaternion(0.020594146, -0.02784615, -0.1539771, 0.9874672)
+bones/2/rotation = Quaternion(-0.016753972, 0.019024227, 0.3159517, 0.94843656)
+bones/5/position = Vector3(0.08947408, 0.0821126, 0.039454628)
+bones/6/rotation = Quaternion(-0.0035454703, -0.07422753, -0.25505778, 0.964066)
+bones/7/rotation = Quaternion(-0.020701852, 0.04204204, 0.50130624, 0.86399996)
+bones/10/rotation = Quaternion(0.038732413, -0.006586909, 0.05465625, 0.997732)
+bones/14/rotation = Quaternion(0.34635532, -0.26603043, 0.3711078, 0.8194784)
+bones/15/rotation = Quaternion(-0.10242002, 0.22709845, 0.34926865, 0.9032983)
+
+[node name="ThumbLower_R_001" parent="Armature/Skeleton3D" index="0" unique_id=1335108984]
+transform = Transform3D(0.47765177, -0.87853676, -0.004689469, 0.86900616, 0.47167227, 0.14951013, -0.12913826, -0.07548896, 0.98874897, -0.41941556, -0.63923216, 0.036267594)
+
+[node name="Hammer" parent="Armature/Skeleton3D/ThumbLower_R_001" index="0" unique_id=264951805]
+transform = Transform3D(-0.7848948, 0.29907513, -0.011162529, 0.24824491, 0.94592565, -0.02239145, 0.0032055527, -0.024539784, -0.9991565, 0.0026055574, -0.023379132, -0.0014807582)
+surface_material_override/0 = SubResource("StandardMaterial3D_wvbnc")
+
+[node name="Palm3_R_002" parent="Armature/Skeleton3D" index="1" unique_id=938169427]
+transform = Transform3D(-0.63670015, -0.7642228, 0.10284204, 0.7565393, -0.6448928, -0.10844961, 0.14920175, 0.008754179, 0.98876786, -0.50530916, -0.6604202, 0.03620348)
+
+[node name="Barrel" parent="Armature/Skeleton3D/Palm3_R_002" index="0" unique_id=260290406]
+surface_material_override/0 = SubResource("StandardMaterial3D_5yxrq")
+
+[node name="Palm3_R" parent="Armature/Skeleton3D" index="2" unique_id=161534720]
+transform = Transform3D(-0.937612, -0.34738976, -0.014282815, 0.34760734, -0.9374745, -0.017617345, -0.007269688, -0.021483038, 0.9997426, -0.306435, -0.5926604, -0.0007624049)
+
+[node name="Chassis" parent="Armature/Skeleton3D/Palm3_R" index="0" unique_id=194458785]
+surface_material_override/0 = SubResource("StandardMaterial3D_a45yg")
+
+[node name="Body" parent="Armature/Skeleton3D" index="3" unique_id=1986247228]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqdpd")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
