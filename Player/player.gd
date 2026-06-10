@@ -39,7 +39,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseMotion:
 		player.rotate_y(-event.relative.x * sensitivity)
 		head.rotate_x(-event.relative.y * sensitivity)
@@ -49,7 +49,6 @@ func _unhandled_input(event):
 
 func _process(delta):
 	#REMOVE LATER!!!!!!!!!!!!!!!!!
-	$Head/Pivot/Camera/Label.text = str(PlayerData.revolver_ammo)
 	if Input.is_action_just_pressed("DEBUG hurt self"):
 		hit("revolver")
 	

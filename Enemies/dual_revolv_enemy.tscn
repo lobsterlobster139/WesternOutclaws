@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://dbeguag0yo2ad"]
+
+[ext_resource type="Script" uid="uid://cfmba4njx23sg" path="res://Enemies/dual_revolv_enemy.gd" id="1_6vru7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82v8w"]
+albedo_color = Color(0.51983595, 0.22046635, 0.14211231, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6vru7"]
+material = SubResource("StandardMaterial3D_82v8w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vru7"]
+albedo_color = Color(0.010485103, 0.010485105, 0.010485104, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_88at6"]
+material = SubResource("StandardMaterial3D_6vru7")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_88at6"]
+
+[sub_resource type="Animation" id="Animation_6vru7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyesight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_88at6"]
+resource_name = "dartingeyes"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyesight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.7853982, 0), Vector3(0, -0.7853982, 0), Vector3(0, 0.7853982, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vy8m6"]
+_data = {
+&"RESET": SubResource("Animation_6vru7"),
+&"dartingeyes": SubResource("Animation_88at6")
+}
+
+[node name="DualRevolvEnemy" type="CharacterBody3D" unique_id=1069771034]
+collision_layer = 2
+collision_mask = 21
+script = ExtResource("1_6vru7")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=358494342]
+mesh = SubResource("CapsuleMesh_6vru7")
+
+[node name="Mouth" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=1193827879]
+transform = Transform3D(-2.3632871e-09, 0, 0.18336366, -0.05406571, -4.371139e-08, -8.015081e-09, 2.3632873e-09, -1, 1.0017889e-15, -0.0004107952, 0.36636627, -0.52586406)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../..")
+
+[node name="Eyebrows" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=712658554]
+transform = Transform3D(0.018820198, 2.9065038e-08, 0.09677127, -0.021140406, -3.264826e-08, 0.08615039, 1.2372073e-09, -1, 7.078543e-16, 0.09908151, 0.70961434, -0.52586406)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="PlaceholderMesh/Eyebrows" unique_id=440754934]
+transform = Transform3D(-0.2588191, -1.9440613e-06, -4.4215736, -1.55742e-09, 1, -5.470405e-09, 0.2110137, 3.2587968e-07, -0.258819, -3.7306423, 0, -1.107938)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../../..")
+
+[node name="DeadEyesMesh" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=1979308425]
+transform = Transform3D(0.019140856, 2.9065038e-08, 0.070806816, -0.021500597, -3.264826e-08, 0.0630356, 1.2582868e-09, -1, 5.1793174e-16, 0.13256243, 0.5362528, -0.52586406)
+visible = false
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh/DeadEyesMesh" unique_id=434249128]
+transform = Transform3D(-0.10374728, -1.6760198e-06, -3.275477, -1.3888304e-09, 1, -4.1214903e-09, 0.30201286, 4.5860097e-07, -0.10374725, 0, 0, 0)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="PlaceholderMesh/DeadEyesMesh" unique_id=1524615309]
+transform = Transform3D(0.99999994, -1.1368684e-13, 1.1920929e-07, 0, 1, 1.4820207e-16, -1.4901161e-08, -2.0341622e-14, 0.99999994, -5.543353, 0, -1.8907635)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh/DeadEyesMesh/MeshInstance3D9" unique_id=1160831850]
+transform = Transform3D(-0.10374728, -1.6760198e-06, -3.275477, -1.3888304e-09, 1, -4.1214903e-09, 0.30201286, 4.5860097e-07, -0.10374725, 0, 0, 0)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../../../..")
+
+[node name="EyeMesh" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=1099414558]
+transform = Transform3D(-2.3632871e-09, 0, 0.06623493, -0.05406571, -4.371139e-08, -2.895221e-09, 2.3632873e-09, -1, 3.6186788e-16, 0.14569569, 0.5407574, -0.52586406)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PlaceholderMesh/EyeMesh" unique_id=1400101738]
+transform = Transform3D(1, 0, 2.9256524e-22, 2.220446e-16, 1, 0, -3.5527137e-15, -3.3881318e-21, 1, 0, 0, -4.000877)
+mesh = SubResource("PlaneMesh_88at6")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1386551923]
+shape = SubResource("CapsuleShape3D_88at6")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=882823437]
+path_desired_distance = 0.5
+
+[node name="Eyesight" type="RayCast3D" parent="." unique_id=494717279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002036363, 0.465976, 0)
+target_position = Vector3(0, 0, -7)
+
+[node name="Timer" type="Timer" parent="Eyesight" unique_id=1375714654]
+wait_time = 0.4
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1576139596]
+libraries/ = SubResource("AnimationLibrary_vy8m6")
+autoplay = &"dartingeyes"
+
+[connection signal="timeout" from="Eyesight/Timer" to="." method="_on_timer_timeout"]

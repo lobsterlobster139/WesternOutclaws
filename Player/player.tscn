@@ -7,6 +7,7 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+height = 1.8847656
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 height = 1.0
@@ -23,6 +24,7 @@ visible = false
 mesh = SubResource("CapsuleMesh_hvfyp")
 
 [node name="FullCollision" type="CollisionShape3D" parent="." unique_id=1181729024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.057617188, 0)
 shape = SubResource("CapsuleShape3D_hvfyp")
 
 [node name="CrouchCollision" type="CollisionShape3D" parent="." unique_id=968426518]
@@ -46,7 +48,6 @@ current = true
 [node name="EyeRaycast" type="RayCast3D" parent="Head/Pivot/Camera" unique_id=1277956730]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.027271152, 0)
 target_position = Vector3(0, -0.1, -2)
-collision_mask = 16
 debug_shape_custom_color = Color(0.8901961, 0.09019608, 0.8901961, 1)
 
 [node name="RevolverCast" type="RayCast3D" parent="Head/Pivot/Camera" unique_id=760846391]
@@ -69,13 +70,13 @@ aim_cast = NodePath("../RevolverCast")
 [node name="TopRaycast" type="RayCast3D" parent="WallClimbDetectors" unique_id=515081434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727268, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 16
+collision_mask = 17
 debug_shape_custom_color = Color(0.8901961, 0.09019608, 0.8901961, 1)
 
 [node name="DickRaycast" type="RayCast3D" parent="WallClimbDetectors" unique_id=25856053]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4648562, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 16
+collision_mask = 17
 debug_shape_custom_color = Color(0.8901961, 0.09019608, 0.8901961, 1)
 
 [node name="WalljumpCooldown" type="Timer" parent="." unique_id=383283937]
