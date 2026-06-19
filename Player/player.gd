@@ -34,6 +34,12 @@ var can_walljump = true
 #variables that actually matter in game
 var health = 9
 var cigarettes = 5
+var current_direction = null
+
+func is_player():
+	pass
+
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -96,6 +102,7 @@ func _physics_process(delta):
 	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	
 	if is_on_floor():
 		if direction:

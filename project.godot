@@ -113,6 +113,8 @@ hammer_down={
 3d_physics/layer_3="Bullets"
 3d_physics/layer_4="Zones"
 3d_physics/layer_5="Terrain"
+3d_physics/layer_7="WanderSuccessNode"
+3d_physics/layer_8="WanderNode"
 
 [navigation]
 

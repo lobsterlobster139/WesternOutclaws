@@ -1,0 +1,45 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://c1g7jmgnj832j"]
+
+[ext_resource type="Script" uid="uid://c6oe3jyrak4tm" path="res://ai/tasks/wander_to_random.gd" id="1_7hskr"]
+[ext_resource type="Script" uid="uid://bbako5hbsg5r5" path="res://ai/tasks/look_at_target.gd" id="2_6icse"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_dmdyf"]
+
+[sub_resource type="BTFail" id="BTFail_dmdyf"]
+
+[sub_resource type="BTSequence" id="BTSequence_7hskr"]
+custom_name = "Sequence - Pursue"
+children = [SubResource("BTFail_dmdyf")]
+
+[sub_resource type="BTWait" id="BTWait_ahvxf"]
+duration = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_6icse"]
+custom_name = "Sequence - Chill"
+children = [SubResource("BTWait_ahvxf")]
+
+[sub_resource type="BTProbability" id="BTProbability_wdawp"]
+children = [SubResource("BTSequence_6icse")]
+
+[sub_resource type="BTAction" id="BTAction_wdawp"]
+script = ExtResource("2_6icse")
+
+[sub_resource type="BTAction" id="BTAction_ahvxf"]
+script = ExtResource("1_7hskr")
+
+[sub_resource type="BTWait" id="BTWait_6icse"]
+
+[sub_resource type="BTSequence" id="BTSequence_vxa6h"]
+custom_name = "Sequence - Wander"
+children = [SubResource("BTAction_wdawp"), SubResource("BTAction_ahvxf"), SubResource("BTWait_6icse")]
+
+[sub_resource type="BTSelector" id="BTSelector_vt3y6"]
+custom_name = "Selector - Patrol"
+children = [SubResource("BTProbability_wdawp"), SubResource("BTSequence_vxa6h")]
+
+[sub_resource type="BTSelector" id="BTSelector_7hskr"]
+children = [SubResource("BTSequence_7hskr"), SubResource("BTSelector_vt3y6")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_dmdyf")
+root_task = SubResource("BTSelector_7hskr")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://7p1ena6d7xe6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vy8m6"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_88at6"]
+radius = 0.1
+height = 0.2
+
+[node name="WanderNode" type="Area3D" unique_id=1315786587]
+collision_layer = 128
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=116190166]
+shape = SubResource("SphereShape3D_vy8m6")
+
+[node name="WanderNodeMesh" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1590349234]
+visible = false
+mesh = SubResource("SphereMesh_88at6")
+skeleton = NodePath("../../..")

@@ -4,6 +4,7 @@ extends Node3D
 @onready var gun_anim = $PlayerRightArmVer4.animation_player
 @export var camera : Camera3D
 @export var aim_cast : RayCast3D
+@export var player : CharacterBody3D
 
 var is_reloading = false
 var hammer_down = false
