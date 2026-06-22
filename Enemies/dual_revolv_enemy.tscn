@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbeguag0yo2ad"]
 
-[ext_resource type="Script" uid="uid://cfmba4njx23sg" path="res://Enemies/dual_revolv_enemy.gd" id="1_6vru7"]
+[ext_resource type="Script" uid="uid://brwp41hdebbr6" path="res://Enemies/dual_revolv_enemy2.gd" id="1_88at6"]
 [ext_resource type="BehaviorTree" uid="uid://c1g7jmgnj832j" path="res://ai/trees/dualrevolverai.tres" id="2_88at6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82v8w"]
@@ -17,54 +17,16 @@ material = SubResource("StandardMaterial3D_6vru7")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_88at6"]
 
-[sub_resource type="Animation" id="Animation_6vru7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyes/Eyesight:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_88at6"]
-resource_name = "dartingeyes"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyes/Eyesight:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.46666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.7853982, 0), Vector3(0, -0.7853982, 0), Vector3(0, 0.7853982, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vy8m6"]
-_data = {
-&"RESET": SubResource("Animation_6vru7"),
-&"dartingeyes": SubResource("Animation_88at6")
-}
-
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_vy8m6"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_88at6"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_88at6"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_88at6"]
+height = 2.05
+radius = 1.3
 
 [node name="DualRevolvEnemy" type="CharacterBody3D" unique_id=1069771034]
 collision_layer = 2
 collision_mask = 23
-script = ExtResource("1_6vru7")
+script = ExtResource("1_88at6")
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=358494342]
 mesh = SubResource("CapsuleMesh_6vru7")
@@ -121,54 +83,27 @@ shape = SubResource("CapsuleShape3D_88at6")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=882823437]
 path_desired_distance = 0.4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1576139596]
-libraries/ = SubResource("AnimationLibrary_vy8m6")
-autoplay = &"dartingeyes"
-
 [node name="Eyes" type="Node3D" parent="." unique_id=681680841]
 
 [node name="Eyesight" type="RayCast3D" parent="Eyes" unique_id=494717279]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002036363, 0.465976, 0)
-target_position = Vector3(0, 0, -7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5817268, 0)
+visible = false
+target_position = Vector3(0, 0, -10)
 collision_mask = 19
 
-[node name="Timer" type="Timer" parent="Eyes/Eyesight" unique_id=1375714654]
-wait_time = 0.4
-one_shot = true
-
-[node name="EyesightRight" type="RayCast3D" parent="Eyes" unique_id=1578629560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334353, 0.465976, 0)
-target_position = Vector3(0, 0, -7)
-collision_mask = 19
-
-[node name="EyesightLeft" type="RayCast3D" parent="Eyes" unique_id=794746451]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3655114, 0.465976, 0)
-target_position = Vector3(0, 0, -7)
+[node name="EyesightLong" type="RayCast3D" parent="Eyes" unique_id=371660797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5817268, 0)
+target_position = Vector3(0, 0, -20)
 collision_mask = 19
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=226413515]
 behavior_tree = ExtResource("2_88at6")
+active = false
 blackboard_plan = SubResource("BlackboardPlan_vy8m6")
 
-[node name="WanderSuccessArea" type="Area3D" parent="." unique_id=926284978]
-collision_layer = 64
-collision_mask = 128
+[node name="PlayerProxSensor" type="Area3D" parent="." unique_id=2143695571]
+collision_layer = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WanderSuccessArea" unique_id=891243572]
-shape = SubResource("SphereShape3D_88at6")
-
-[node name="RotationCone" type="MeshInstance3D" parent="." unique_id=965153655]
-transform = Transform3D(0.43314165, 0, 0, 0, 2.4158607, 0, 0, 0, 1, 0, 0, 0)
-visible = false
-mesh = SubResource("PrismMesh_88at6")
-
-[node name="RotationTimer" type="Timer" parent="." unique_id=1493146586]
-wait_time = 4.0
-
-[node name="WanderSuccessCollision" type="Timer" parent="." unique_id=1246932818]
-wait_time = 5.0
-one_shot = true
-
-[connection signal="timeout" from="Eyes/Eyesight/Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="RotationTimer" to="." method="_on_rotation_timer_timeout"]
-[connection signal="timeout" from="WanderSuccessCollision" to="." method="_on_wander_success_collision_timeout"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerProxSensor" unique_id=1438085277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07700199, 0)
+shape = SubResource("CylinderShape3D_88at6")

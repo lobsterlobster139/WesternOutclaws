@@ -63,6 +63,8 @@ func _process(delta):
 		if cigarettes > 0 and health < 9:
 			health += 1
 			cigarettes -= 1
+	
+	$Head/Pivot/Camera/Label.text = str($"../Testing Level/NavigationRegion3D/DualRevolvEnemy".state)
 
 
 

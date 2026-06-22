@@ -1,8 +1,5 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://c1g7jmgnj832j"]
 
-[ext_resource type="Script" uid="uid://c6oe3jyrak4tm" path="res://ai/tasks/wander_to_random.gd" id="1_7hskr"]
-[ext_resource type="Script" uid="uid://bbako5hbsg5r5" path="res://ai/tasks/look_at_target.gd" id="2_6icse"]
-
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_dmdyf"]
 
 [sub_resource type="BTFail" id="BTFail_dmdyf"]
@@ -21,17 +18,11 @@ children = [SubResource("BTWait_ahvxf")]
 [sub_resource type="BTProbability" id="BTProbability_wdawp"]
 children = [SubResource("BTSequence_6icse")]
 
-[sub_resource type="BTAction" id="BTAction_wdawp"]
-script = ExtResource("2_6icse")
-
-[sub_resource type="BTAction" id="BTAction_ahvxf"]
-script = ExtResource("1_7hskr")
-
 [sub_resource type="BTWait" id="BTWait_6icse"]
 
 [sub_resource type="BTSequence" id="BTSequence_vxa6h"]
 custom_name = "Sequence - Wander"
-children = [SubResource("BTAction_wdawp"), SubResource("BTAction_ahvxf"), SubResource("BTWait_6icse")]
+children = [SubResource("BTWait_6icse")]
 
 [sub_resource type="BTSelector" id="BTSelector_vt3y6"]
 custom_name = "Selector - Patrol"
