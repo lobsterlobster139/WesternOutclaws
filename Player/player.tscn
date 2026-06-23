@@ -62,11 +62,18 @@ offset_right = 359.0
 offset_bottom = 114.0
 label_settings = SubResource("LabelSettings_btcbx")
 
-[node name="Revolver" parent="Head/Pivot/Camera" unique_id=1192419823 node_paths=PackedStringArray("camera", "aim_cast", "player") instance=ExtResource("3_btcbx")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.24075505, -0.3885219, -0.49682945)
+[node name="Revolver" parent="Head/Pivot/Camera" unique_id=1192419823 node_paths=PackedStringArray("camera", "aim_cast", "player", "aim_marker") instance=ExtResource("3_btcbx")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.2679058, -0.43166223, -0.6042643)
 camera = NodePath("..")
 aim_cast = NodePath("../RevolverCast")
 player = NodePath("../../../..")
+aim_marker = NodePath("../Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="Head/Pivot/Camera" unique_id=146220845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.079, -0.305, -0.046)
+
+[node name="Marker3D2" type="Marker3D" parent="Head/Pivot/Camera" unique_id=923052675]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.07890907, -0.30495825, -0.045942187)
 
 [node name="WallClimbDetectors" type="Node3D" parent="." unique_id=932216127]
 visible = false

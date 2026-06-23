@@ -269,6 +269,8 @@ func _looking_while_chase() -> void:
 func hit(bullet_type):
 	if bullet_type == "revolver":
 		health -= PlayerData.revolver_damage
+	if state != State.CHASE or State.ATTACK:
+		_enter_state(State.CHASE)
 
 func death():
 	dead = true

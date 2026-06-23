@@ -5,11 +5,12 @@ extends Node3D
 @export var camera : Camera3D
 @export var aim_cast : RayCast3D
 @export var player : CharacterBody3D
+@export var aim_marker : Marker3D
 
 var is_reloading = false
 var hammer_down = false
 
-@onready var revolver_position = self.position
+@onready var revolver_position = position
 
 
 
@@ -40,11 +41,11 @@ func _process(delta):
 			hammer_down = false
 	
 	if Input.is_action_pressed("aim"):
-		self.position.x = CAMERAOFFSET_X
-		self.position.z = CAMERAOFFSET_Z
-		self.position.y = CAMERAOFFSET_Y
+		position = lerp(position, aim_marker.position, delta * 10.0)
+		player.ui.aim_marker.hide()
 	else:
-		self.position = revolver_position
+		position = lerp(position, revolver_position, delta * 10.0)
+		player.ui.aim_marker.show()
 	
 	if Input.is_action_just_pressed("hammer_down"):
 		if not gun_anim.is_playing():

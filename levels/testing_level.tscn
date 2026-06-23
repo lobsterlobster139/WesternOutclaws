@@ -488,8 +488,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.129932, 1.3488778, 0)
 patrol_points = [NodePath("../../../PatrolPoints/Marker3D"), NodePath("../../../PatrolPoints/Marker3D2")]
 player = NodePath("../../../Player")
 
-[node name="Player" parent="." unique_id=2120456270 instance=ExtResource("5_72vgf")]
+[node name="Player" parent="." unique_id=2120456270 node_paths=PackedStringArray("ui") instance=ExtResource("5_72vgf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.040999, 2)
+ui = NodePath("CanvasLayer/PlayerUI")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=820794174]
 

@@ -11,7 +11,7 @@ extends CharacterBody3D
 @onready var bottom_raycast = $WallClimbDetectors/DickRaycast
 @onready var eye_raycast = $Head/Pivot/Camera/EyeRaycast
 
-
+@export var ui: Control
 
 const JUMP_VELOCITY = 5.0
 const WALK_SPEED = 4.0
