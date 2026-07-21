@@ -289,6 +289,7 @@ func death():
 # OTHER
 # --------------------
 
+#github is fucking stupid sometijmes
 func spawn_bullet():
 	if _can_see_player():
 		var hit_or_not = randi_range(1,2)
