@@ -32,6 +32,8 @@ func _process(delta):
 			hammer_down = false
 			if aim_cast.is_colliding() and aim_cast.get_collider().get_class() == "CharacterBody3D":
 				aim_cast.get_collider().hit("revolver")
+			elif aim_cast.is_colliding() and aim_cast.get_collider().has_method("is_headshot"):
+				aim_cast.get_collider().crit_hit()
 	
 	if Input.is_action_just_pressed("reload"):
 		if not gun_anim.is_playing():

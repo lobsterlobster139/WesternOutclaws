@@ -1,0 +1,44 @@
+[gd_scene format=4 uid="uid://d26jgaavshbui"]
+
+[ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_bt44k"]
+[ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_kx6l7"]
+[ext_resource type="Material" uid="uid://drjc8wrsjfxkd" path="res://trenchbroom/textures/VOL3/F3/OULV1_5.tres" id="3_kx6l7"]
+[ext_resource type="PackedScene" uid="uid://dbeguag0yo2ad" path="res://Enemies/dual_revolv_enemy.tscn" id="4_n46q3"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_btoec"]
+_surfaces = [{
+"aabb": AABB(-33, -0.5, -51, 131, 1, 159.5),
+"attribute_data": PackedByteArray("AADEwQAAAL4AAARBAAAAvgAABEEAAAA+AADEwQAAAD4AANpBAAAAPgAASsEAAAA+AABKwQAAAL4AANpBAAAAvgAA2sEAAARBAADawQAAxMEAAEpBAADEwQAASkEAAARBAADaQQAABEEAAErBAAAEQQAASsEAAMTBAADaQQAAxMEAANrBAAAAvgAASkEAAAC+AABKQQAAAD4AANrBAAAAPgAAxEEAAAA+AAAEwQAAAD4AAATBAAAAvgAAxEEAAAC+"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcA"),
+"material": ExtResource("3_kx6l7"),
+"name": "VOL3/F3/OULV1_5",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AADEQgAAAD8AAEzCAAAEwgAAAD8AAEzCAAAEwgAAAL8AAEzCAADEQgAAAL8AAEzCAAAEwgAAAL8AANlCAAAEwgAAAL8AAEzCAAAEwgAAAD8AAEzCAAAEwgAAAD8AANlCAAAEwgAAAL8AANlCAADEQgAAAL8AANlCAADEQgAAAL8AAEzCAAAEwgAAAL8AAEzCAAAEwgAAAD8AANlCAAAEwgAAAD8AAEzCAADEQgAAAD8AAEzCAADEQgAAAD8AANlCAADEQgAAAD8AANlCAADEQgAAAD8AAEzCAADEQgAAAL8AAEzCAADEQgAAAL8AANlCAADEQgAAAL8AANlCAAAEwgAAAL8AANlCAAAEwgAAAD8AANlCAADEQgAAAD8AANlC/////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+/")
+}]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gwceb"]
+points = PackedVector3Array(98, 0.5, 108.5, 98, -0.5, 108.5, -33, 0.5, 108.5, -33, -0.5, 108.5, 98, 0.5, -51, 98, -0.5, -51, -33, 0.5, -51, -33, -0.5, -51)
+
+[node name="Level1" type="Node3D" unique_id=944599405]
+
+[node name="FuncGodotMap" type="Node3D" parent="." unique_id=285091300]
+script = ExtResource("1_bt44k")
+local_map_file = "uid://c6dc3xosryr3t"
+map_settings = ExtResource("2_kx6l7")
+metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
+
+[node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap" unique_id=822828615]
+collision_mask = 0
+
+[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=173043701]
+mesh = SubResource("ArrayMesh_btoec")
+
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=124834279]
+shape = SubResource("ConvexPolygonShape3D_gwceb")
+
+[node name="DualRevolvEnemy" parent="." unique_id=1069771034 instance=ExtResource("4_n46q3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)

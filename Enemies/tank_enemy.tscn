@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://c0i8k7oqrmgu5"]
+
+[ext_resource type="Script" uid="uid://du3igybv5mmt" path="res://Enemies/tank_enemy.gd" id="1_a3oi6"]
+[ext_resource type="PackedScene" uid="uid://6uqodgocgye1" path="res://models/tankenemy_model.tscn" id="2_a3oi6"]
+[ext_resource type="PackedScene" uid="uid://soyipw63dflu" path="res://Enemies/head_shot.tscn" id="3_58050"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82v8w"]
+albedo_color = Color(0.51983595, 0.22046635, 0.14211231, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mwpbi"]
+material = SubResource("StandardMaterial3D_82v8w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vru7"]
+albedo_color = Color(0.010485103, 0.010485105, 0.010485104, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ifx1b"]
+material = SubResource("StandardMaterial3D_6vru7")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kur8g"]
+radius = 0.8618164
+height = 2.9707642
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7ln4d"]
+height = 2.05
+radius = 1.3
+
+[node name="TankEnemy" type="CharacterBody3D" unique_id=1562917667 node_paths=PackedStringArray("model")]
+script = ExtResource("1_a3oi6")
+model = NodePath("tankenemy_model")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=94823958]
+visible = false
+mesh = SubResource("CapsuleMesh_mwpbi")
+
+[node name="Mouth" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=1616023798]
+transform = Transform3D(-2.3632871e-09, 0, 0.18336366, -0.05406571, -4.371139e-08, -8.015081e-09, 2.3632873e-09, -1, 1.0017889e-15, -0.0004107952, 0.36636627, -0.52586406)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../..")
+
+[node name="Eyebrows" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=1736039505]
+transform = Transform3D(0.018820198, 2.9065038e-08, 0.09677127, -0.021140406, -3.264826e-08, 0.08615039, 1.2372073e-09, -1, 7.078543e-16, 0.09908151, 0.70961434, -0.52586406)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="PlaceholderMesh/Eyebrows" unique_id=466895170]
+transform = Transform3D(-0.2588191, -1.9440613e-06, -4.4215736, -1.55742e-09, 1, -5.470405e-09, 0.2110137, 3.2587968e-07, -0.258819, -3.7306423, 0, -1.107938)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../../..")
+
+[node name="DeadEyesMesh" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=248312412]
+transform = Transform3D(0.019140856, 2.9065038e-08, 0.070806816, -0.021500597, -3.264826e-08, 0.0630356, 1.2582868e-09, -1, 5.1793174e-16, 0.13256243, 0.5362528, -0.52586406)
+visible = false
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh/DeadEyesMesh" unique_id=475460775]
+transform = Transform3D(-0.10374728, -1.6760198e-06, -3.275477, -1.3888304e-09, 1, -4.1214903e-09, 0.30201286, 4.5860097e-07, -0.10374725, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="PlaceholderMesh/DeadEyesMesh" unique_id=1734084927]
+transform = Transform3D(0.99999994, -1.1368684e-13, 1.1920929e-07, 0, 1, 1.4820207e-16, -1.4901161e-08, -2.0341622e-14, 0.99999994, -5.543353, 0, -1.8907635)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PlaceholderMesh/DeadEyesMesh/MeshInstance3D9" unique_id=2006088652]
+transform = Transform3D(-0.10374728, -1.6760198e-06, -3.275477, -1.3888304e-09, 1, -4.1214903e-09, 0.30201286, 4.5860097e-07, -0.10374725, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../../../..")
+
+[node name="EyeMesh" type="MeshInstance3D" parent="PlaceholderMesh" unique_id=1683228244]
+transform = Transform3D(-2.3632871e-09, 0, 0.06623493, -0.05406571, -4.371139e-08, -2.895221e-09, 2.3632873e-09, -1, 3.6186788e-16, 0.14569569, 0.5407574, -0.52586406)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PlaceholderMesh/EyeMesh" unique_id=1908706983]
+transform = Transform3D(1, 0, 2.9256524e-22, 2.220446e-16, 1, 0, -3.5527137e-15, -3.3881318e-21, 1, 0, 0, -4.000877)
+mesh = SubResource("PlaneMesh_ifx1b")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=229884327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48538208, 0)
+shape = SubResource("CapsuleShape3D_kur8g")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=157141194]
+path_desired_distance = 0.4
+
+[node name="Eyes" type="Node3D" parent="." unique_id=1155646800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="Eyesight" type="RayCast3D" parent="Eyes" unique_id=1497760684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96243083, 0)
+target_position = Vector3(0, 0, -10)
+collision_mask = 19
+
+[node name="EyesightLong" type="RayCast3D" parent="Eyes" unique_id=1480010560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15365577, 0)
+target_position = Vector3(0, 0, -20)
+collision_mask = 19
+
+[node name="MeleeRange" type="RayCast3D" parent="Eyes" unique_id=976978684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11045742, 0)
+target_position = Vector3(0, 0, -1.8)
+debug_shape_custom_color = Color(0.62380797, 0.0010348111, 0.74416506, 1)
+
+[node name="PlayerProxSensor" type="Area3D" parent="." unique_id=1191172162]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerProxSensor" unique_id=1209302503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07700199, 0)
+shape = SubResource("CylinderShape3D_7ln4d")
+
+[node name="tankenemy_model" parent="." unique_id=1161344547 instance=ExtResource("2_a3oi6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.96965414, 0)
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=323390667]
+wait_time = 0.9
+one_shot = true
+
+[node name="HeadShot" parent="." unique_id=1937130233 node_paths=PackedStringArray("parent") instance=ExtResource("3_58050")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8407283, -0.5295576)
+parent = NodePath("..")
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

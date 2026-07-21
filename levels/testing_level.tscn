@@ -14,6 +14,7 @@
 [ext_resource type="Material" uid="uid://bmijgp2qxml1r" path="res://trenchbroom/textures/VOL3/F1/WDRF1_2.tres" id="11_dxiqj"]
 [ext_resource type="Material" uid="uid://dkyhc50isw26r" path="res://trenchbroom/textures/VOL3/F3/OUMD1_1.tres" id="12_1c6tv"]
 [ext_resource type="PackedScene" uid="uid://dbeguag0yo2ad" path="res://Enemies/dual_revolv_enemy.tscn" id="13_kkolb"]
+[ext_resource type="PackedScene" uid="uid://c0i8k7oqrmgu5" path="res://Enemies/tank_enemy.tscn" id="14_ya7ow"]
 [ext_resource type="PackedScene" uid="uid://cbhj4inxf4e6m" path="res://Player/player_ui.tscn" id="15_kkolb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_72vgf"]
@@ -484,8 +485,21 @@ shape = SubResource("ConvexPolygonShape3D_fodpi")
 shape = SubResource("ConvexPolygonShape3D_b2f7c")
 
 [node name="DualRevolvEnemy" parent="Testing Level/NavigationRegion3D" unique_id=1069771034 node_paths=PackedStringArray("patrol_points", "player") instance=ExtResource("13_kkolb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.129932, 1.3488778, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.129932, 3.844245, 0)
 patrol_points = [NodePath("../../../PatrolPoints/Marker3D"), NodePath("../../../PatrolPoints/Marker3D2")]
+player = NodePath("../../../Player")
+
+[node name="DualRevolvEnemy2" parent="Testing Level/NavigationRegion3D" unique_id=1321243112 node_paths=PackedStringArray("patrol_points", "player") instance=ExtResource("13_kkolb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.056263316, 8.82753, 4.3282323)
+patrol_points = [NodePath("../../../PatrolPoints/Marker3D4")]
+attack_range = 5.0
+player = NodePath("../../../Player")
+
+[node name="TankEnemy" parent="Testing Level/NavigationRegion3D" unique_id=1562917667 node_paths=PackedStringArray("patrol_points", "player") instance=ExtResource("14_ya7ow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.042102, 2.2871628, 3.4236834)
+collision_layer = 2
+collision_mask = 23
+patrol_points = [NodePath("../../../PatrolPoints/Marker3D3")]
 player = NodePath("../../../Player")
 
 [node name="Player" parent="." unique_id=2120456270 node_paths=PackedStringArray("ui") instance=ExtResource("5_72vgf")]
@@ -503,3 +517,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.931197, 0.732483, 0)
 
 [node name="Marker3D2" type="Marker3D" parent="PatrolPoints" unique_id=1696069063]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9734964, 5.1206117, 2.1526914)
+
+[node name="Marker3D3" type="Marker3D" parent="PatrolPoints" unique_id=1723510171]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9024966, 14.261823)
+
+[node name="Marker3D4" type="Marker3D" parent="PatrolPoints" unique_id=551332370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9736366, 0)

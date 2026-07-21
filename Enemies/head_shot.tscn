@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://soyipw63dflu"]
+
+[ext_resource type="Script" uid="uid://bmlduut7pfcyk" path="res://Enemies/head_shot.gd" id="1_426ol"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_88at6"]
+radius = 0.29958826
+
+[node name="HeadShot" type="Area3D" unique_id=1937130233]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_426ol")
+
+[node name="HeadShotBox" type="CollisionShape3D" parent="." unique_id=752242654]
+shape = SubResource("SphereShape3D_88at6")

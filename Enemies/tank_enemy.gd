@@ -5,7 +5,8 @@ extends CharacterBody3D
 @onready var vision_ray: RayCast3D = $Eyes/Eyesight
 @onready var vision_ray_long: RayCast3D = $Eyes/EyesightLong
 @onready var prox_sensor = $PlayerProxSensor
-@onready var misc_anims = $MiscAnims
+@onready var melee_range = $Eyes/MeleeRange
+@onready var attack_cooldown = $AttackCooldown
 
 
 
@@ -15,8 +16,8 @@ extends CharacterBody3D
 # --------------------
 @export var patrol_points: Array[Node3D] = []
 @export var speed_walk: float = 1.7
-@export var speed_run: float = 3.0
-@export var attack_range: float = 3.0
+@export var speed_run: float = 2.5
+@export var attack_range: float = 1.3
 @export var investigate_wait_time: float = 4.0
 @export var patrol_wait_time: float = 3.0
 @export var update_interval: float = 0.2
@@ -24,7 +25,7 @@ extends CharacterBody3D
 @export var model: Node3D
 @onready var anim = model.animation_player
  
-const VIEW_ANGLE: float = 195.0
+const VIEW_ANGLE: float = 120.0
 const SMOOTHING_FACTOR = 0.2
  
 # --------------------
@@ -48,6 +49,7 @@ var update_timer := 0.0
 # --------------------
 var health = 5
 var dead: bool = false
+var attack_cooldown_finished: bool = true
 
 # --------------------
 # READY
@@ -88,6 +90,7 @@ func _physics_process(delta: float) -> void:
 		pass
 	elif state == State.ATTACK or State.INVESTIGATE or State.CHASE:
 		pass
+	
 	
  
 # --------------------
@@ -145,8 +148,16 @@ func _state_chase(delta: float) -> void:
 func _state_attack() -> void:
 	velocity = Vector3.ZERO
 	
-	anim.play("Armature|Shooting")
-	misc_anims.play("Bullets")
+	anim.play("Attack")
+	
+	
+	await get_tree().create_timer(0.55).timeout
+	
+	
+	if melee_range.is_colliding() and attack_cooldown_finished:
+		player.hit("melee")
+		attack_cooldown.start()
+		attack_cooldown_finished = false
 	
 	if global_transform.origin.distance_to(target.global_transform.origin) > attack_range and !_can_see_player():
 		_enter_state(State.CHASE)
@@ -189,14 +200,14 @@ func _update_agent_target() -> void:
  
 func _walk_to(next_pos: Vector3, speed: float) -> void:
 	if speed == speed_walk:
-		anim.play("Armature|Walking")
+		anim.play("Walking")
 	elif speed == speed_run:
-		anim.play("Armature|Running")
+		anim.play("Walking")
 	_move_towards(next_pos, speed)
  
 func _stop_and_idle() -> void:
 	velocity = Vector3.ZERO
-	anim.play("Armature|Idle")
+	anim.play("Idle")
  
 func _go_to_next_patrol_point() -> void:
 	patrol_index = ( patrol_index + 1 ) % patrol_points.size()
@@ -282,15 +293,12 @@ func death():
 	dead = true
 	state = State.IDLE
 	$CollisionShape3D.disabled = true
-	anim.play("Armature|Death")
+	anim.play("Death")
 	
 
 # --------------------
 # OTHER
 # --------------------
 
-func spawn_bullet():
-	if _can_see_player():
-		var hit_or_not = randi_range(1,2)
-		if hit_or_not == 1:
-			player.hit("revolver")
+func _on_attack_cooldown_timeout():
+	attack_cooldown_finished = true

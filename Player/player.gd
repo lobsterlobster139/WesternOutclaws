@@ -55,16 +55,12 @@ func _input(event):
 
 func _process(delta):
 	#REMOVE LATER!!!!!!!!!!!!!!!!!
-	if Input.is_action_just_pressed("DEBUG hurt self"):
-		hit("revolver")
-	
 	
 	if Input.is_action_just_pressed("smoke"):
 		if cigarettes > 0 and health < 9:
 			health += 1
 			cigarettes -= 1
 	
-	$Head/Pivot/Camera/Label.text = str($"../Testing Level/NavigationRegion3D/DualRevolvEnemy".state)
 
 
 
@@ -139,4 +135,7 @@ func _on_walljump_cooldown_timeout():
 func hit(bullet_type):
 	if bullet_type == "revolver":
 		health -= PlayerData.revolver_damage
+	elif bullet_type == "melee":
+		health -= PlayerData.melee_damage
 	print(health)
+	ui.update_health(health)
